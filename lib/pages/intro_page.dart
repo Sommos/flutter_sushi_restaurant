@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sushi_restaurant/components/button.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../components/button.dart';
+import '../theme/colors.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
@@ -13,7 +15,7 @@ class IntroPageState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 138, 60, 55),
+      backgroundColor: primaryColor,
       body: Padding(
         padding: const EdgeInsets.all(25.0),
         child: Column(
@@ -64,7 +66,12 @@ class IntroPageState extends State<IntroPage> {
             const SizedBox(height: 25.0),
 
             // get started button
-            MyButton(text: "Get Started")
+            MyButton(
+              text: "Get Started",
+              onTap: () {
+                Navigator.pushNamed(context, '/menupage');
+              },
+            ),
           ],
         ),
       ),
