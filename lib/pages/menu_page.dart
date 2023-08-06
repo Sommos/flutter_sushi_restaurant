@@ -73,10 +73,30 @@ class _MenuPageState extends State<MenuPage> {
           Icons.menu,
           color: Colors.grey[900],
         ),
-        title: Text(
-          'Tokyo',
-          style: TextStyle(color: Colors.grey[900]),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.location_on_outlined,
+              color: Colors.grey[900],
+            ),
+            const SizedBox(width: 2.0),
+            Text(
+              'Tokyo',
+              style: GoogleFonts.dmSerifDisplay(
+                fontSize: 20.0, 
+                color: Colors.grey[900],
+              ),
+            ),
+          ],
         ),
+        actions: [
+          Icon(
+            Icons.shopping_cart_outlined,
+            color: Colors.grey[900],
+          ),
+          const SizedBox(width: 20.0),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
