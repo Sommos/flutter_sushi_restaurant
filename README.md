@@ -1,9 +1,11 @@
 # Flutter_Sushi_Restaurant
 
 <p align="center">
-    <img src="image_0.png" width="250" />
-    <img src="image_1.png" width="250" />
-    <img src="image_2.png" width="250" />
+    <img src="image_0.png" width="200" />
+    <img src="image_1.png" width="200" />
+    <img src="image_2.png" width="200" />
+    <img src="image_3.png" width="200" />
+    <img src="image_4.png" width="200" />
 </p>
 
 This program is to test flutter and dart, testing out a basic UI for a sushi restaurant.

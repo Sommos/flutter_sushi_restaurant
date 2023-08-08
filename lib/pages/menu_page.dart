@@ -5,6 +5,7 @@ import "../components/food_tile.dart";
 import "../components/button.dart";
 import "../theme/colors.dart";
 import "../models/food.dart";
+import "food_details_page.dart";
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -17,35 +18,41 @@ class _MenuPageState extends State<MenuPage> {
   List foodMenu = [
     // nigiri
     Food(
-      name: 'Salmon Nigiri', 
-      price: '£7.99', 
-      imagePath: 'lib/images/nigiri.png', 
+      name: 'Salmon Nigiri',
+      price: '£7.99',
+      imagePath: 'lib/images/nigiri.png',
       rating: "4.79"
     ),
     // onigiri
     Food(
-      name: 'Salmon Onigiri', 
-      price: '£3.99', 
-      imagePath: 'lib/images/onigiri.png', 
+      name: 'Salmon Onigiri',
+      price: '£3.99',
+      imagePath: 'lib/images/onigiri.png',
       rating: "4.86"
     ),
     // takoyaki
     Food(
-      name: 'Takoyaki', 
-      price: '£4.49', 
-      imagePath: 'lib/images/takoyaki.png', 
+      name: 'Takoyaki',
+      price: '£4.49',
+      imagePath: 'lib/images/takoyaki.png',
       rating: "4.62"
     ),
     // tobiko
     Food(
-      name: 'Salmon Tobiko', 
-      price: '£5.29', 
-      imagePath: 'lib/images/tobiko.png', 
+      name: 'Salmon Tobiko',
+      price: '£5.29',
+      imagePath: 'lib/images/tobiko.png',
       rating: "4.10"
     ),
   ];
 
   List _filteredFoods = [];
+
+  void navigateToFoodDetails(int index) {
+    Navigator.push(context,MaterialPageRoute(
+      builder: (context) => FoodDetailsPage(food: foodMenu[index]),
+    ),);
+  }
 
   @override
   void initState() {
@@ -84,7 +91,7 @@ class _MenuPageState extends State<MenuPage> {
             Text(
               'Tokyo',
               style: GoogleFonts.dmSerifDisplay(
-                fontSize: 20.0, 
+                fontSize: 20.0,
                 color: Colors.grey[900],
               ),
             ),
@@ -161,7 +168,7 @@ class _MenuPageState extends State<MenuPage> {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 hintText: 'Search...',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
               ),
               onChanged: _filterFoods,
             ),
@@ -175,8 +182,8 @@ class _MenuPageState extends State<MenuPage> {
             child: Text(
               "Food Menu",
               style: TextStyle(
-                fontWeight: FontWeight.bold, 
-                color: Colors.grey[800], 
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[800],
                 fontSize: 18.0,
               ),
             ),
@@ -190,12 +197,13 @@ class _MenuPageState extends State<MenuPage> {
               itemCount: _filteredFoods.length,
               itemBuilder: (context, index) => FoodTile(
                 food: _filteredFoods[index],
+                onTap: () => navigateToFoodDetails(index),
               ),
             ),
           ),
 
           const SizedBox(height: 25.0),
-          
+
           // popular food
           Container(
             decoration: BoxDecoration(
@@ -214,9 +222,9 @@ class _MenuPageState extends State<MenuPage> {
                       'lib/images/tobiko.png',
                       height: 60.0,
                     ),
-              
+
                     const SizedBox(width: 20.0),
-              
+
                     // name and price
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,9 +237,9 @@ class _MenuPageState extends State<MenuPage> {
                             color: Colors.grey[800],
                           ),
                         ),
-              
+
                         const SizedBox(height: 10.0),
-              
+
                         // price
                         Text(
                           foodMenu[3].price,
@@ -244,7 +252,7 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ],
                 ),
-              
+
                 // heart
                 const Icon(
                   Icons.favorite_border_outlined,
