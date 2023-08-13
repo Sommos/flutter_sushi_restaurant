@@ -18,31 +18,31 @@ class _MenuPageState extends State<MenuPage> {
   List foodMenu = [
     // nigiri
     Food(
-      name: 'Salmon Nigiri',
+      name: 'Original Sushi',
       price: '£7.99',
-      imagePath: 'lib/images/salmon_nigiri.png',
-      rating: "4.79"
+      imagePath: 'lib/images/original_sushi.png',
+      rating: "4.7"
     ),
     // onigiri
     Food(
-      name: 'Salmon Onigiri',
+      name: 'Shrimp Sushi',
       price: '£3.99',
-      imagePath: 'lib/images/onigiri.png',
-      rating: "4.86"
+      imagePath: 'lib/images/shrimp_sushi.png',
+      rating: "4.8"
     ),
     // takoyaki
     Food(
-      name: 'Takoyaki',
+      name: 'Tamago Sushi',
       price: '£4.49',
-      imagePath: 'lib/images/takoyaki.png',
-      rating: "4.62"
+      imagePath: 'lib/images/tomago_sushi.png',
+      rating: "4.6"
     ),
     // tobiko
     Food(
-      name: 'Salmon Tobiko',
+      name: 'Toro Sushi',
       price: '£5.29',
-      imagePath: 'lib/images/tobiko.png',
-      rating: "4.10"
+      imagePath: 'lib/images/toro.png',
+      rating: "4.1"
     ),
   ];
 
@@ -145,7 +145,7 @@ class _MenuPageState extends State<MenuPage> {
                 ),
                 // image
                 Image.asset(
-                  'lib/images/takoyaki.png',
+                  'lib/images/tomago_sushi.png',
                   height: 100.0,
                 ),
               ],
@@ -167,7 +167,7 @@ class _MenuPageState extends State<MenuPage> {
                   borderSide: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
-                hintText: 'Search...',
+                hintText: 'Search here',
                 prefixIcon: const Icon(Icons.search),
               ),
               onChanged: _filterFoods,
@@ -204,6 +204,24 @@ class _MenuPageState extends State<MenuPage> {
 
           const SizedBox(height: 25.0),
 
+          // Popular Food section
+          Padding(
+            padding: const EdgeInsets.only(right: 25.0, left: 25.0),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Popular Food",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[800],
+                  fontSize: 18.0,
+                ),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 25.0),
+
           // popular food
           Container(
             decoration: BoxDecoration(
@@ -219,7 +237,7 @@ class _MenuPageState extends State<MenuPage> {
                   children: [
                     // image
                     Image.asset(
-                      'lib/images/tobiko.png',
+                      'lib/images/salmon_tobiko.png',
                       height: 60.0,
                     ),
 
@@ -244,8 +262,9 @@ class _MenuPageState extends State<MenuPage> {
                         Text(
                           foodMenu[3].price,
                           style: TextStyle(
+                            fontSize: 16.0,
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey[700],
+                            color: Colors.grey[900],
                           ),
                         ),
                       ],
@@ -253,11 +272,30 @@ class _MenuPageState extends State<MenuPage> {
                   ],
                 ),
 
+                // star rating
+                Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      color: primaryColor,
+                    ),
+                    Text(
+                      foodMenu[3].rating,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+
                 // heart
-                const Icon(
-                  Icons.favorite_border_outlined,
-                  color: Colors.grey,
-                  size: 28.0,
+                IconButton(
+                  onPressed: () {
+                    // handle favorite action
+                  },
+                  icon: const Icon(
+                    Icons.favorite_border_outlined,
+                    color: Colors.grey,
+                    size: 28.0,
+                  ),
                 ),
               ],
             ),

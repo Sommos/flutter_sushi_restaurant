@@ -25,48 +25,68 @@ class FoodTile extends StatelessWidget {
         ),
         margin: const EdgeInsets.only(left: 25.0),
         padding: const EdgeInsets.all(25.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: Stack(
           children: [
-            // image
-            Image.asset(
-              food.imagePath,
-              height: 150.0,
-            ),
-            // text
-            Text(
-              food.name,
-              style: GoogleFonts.dmSerifDisplay(fontSize: 20.0),
-            ),
-            SizedBox(
-              width: 160.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // price
-                  Text(
-                    food.price,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[700],
-                    ),
-                  ),
-
-                  Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // image
+                Image.asset(
+                  food.imagePath,
+                  height: 120.0,
+                  width: 120.0,
+                ),
+                // text
+                Text(
+                  food.name,
+                  style: GoogleFonts.dmSerifDisplay(fontSize: 20.0),
+                ),
+                SizedBox(
+                  width: 120.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // rating
-                      Icon(
-                        Icons.star,
-                        color: primaryColor,
-                      ),
+                      // price
                       Text(
-                        food.rating,
-                        style: const TextStyle(color: Colors.grey),
+                        food.price,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[900],
+                        ),
+                      ),
+
+                      Row(
+                        children: [
+                          // rating
+                          Icon(
+                            Icons.star,
+                            color: primaryColor,
+                          ),
+                          Text(
+                            food.rating,
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
+              ],
+            ),
+            Positioned(
+              top: -12,
+              right: -12,
+              child: IconButton(
+                onPressed: () {
+                  // handle favorite action
+                },
+                icon: const Icon(
+                  Icons.favorite_border,
+                  color: Colors.grey,
+                  size: 28.0,
+                ),
               ),
             ),
           ],
