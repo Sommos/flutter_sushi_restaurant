@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
 import "package:flutter_sushi_restaurant/components/button.dart";
 import "package:google_fonts/google_fonts.dart";
+import "package:provider/provider.dart";
 
 import "../models/food.dart";
+import "../models/shop.dart";
 import "../theme/colors.dart";
 
 class FoodDetailsPage extends StatefulWidget {
@@ -22,7 +24,11 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
 
   void decrementQuantity() {
     setState(() {
-      quantityCount--;
+      if(quantityCount > 0) {
+        quantityCount--;
+      } else {
+        quantityCount = 0;
+      }
     });
   }
 
@@ -32,7 +38,43 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
     });
   }
 
-  void addToCart() {}
+  void addToCart() {
+    if(quantityCount > 0) {
+      final shop = context.read<Shop>();
+      shop.addToCart(widget.food, quantityCount);
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (content) => AlertDialog(
+          backgroundColor: primaryColor,
+          content: const Text(
+            "Successfully added to cart!",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            Align(
+              alignment: Alignment.center,
+              child: IconButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.done,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +145,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                   const SizedBox(height: 10.0),
 
                   Text(
-                    "Golden pearls of tobiko, resembling tiny treasures from the sea, glisten atop a canvas of meticulously crafted sushi rice. Each delicate orb bursts with a burst of briny flavor, harmonizing with the rice's subtle seasoning to create a symphony of taste sensations. A culinary masterpiece that marries the ocean's bounty with the artistry of sushi craftsmanship, each bite of tobiko sushi is a journey into the depths of culinary excellence.",
+                    widget.food.description,
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 14.0,

@@ -1,10 +1,11 @@
 import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
+import "package:provider/provider.dart";
 
 import "../components/food_tile.dart";
 import "../components/button.dart";
+import "../models/shop.dart";
 import "../theme/colors.dart";
-import "../models/food.dart";
 import "food_details_page.dart";
 
 class MenuPage extends StatefulWidget {
@@ -15,92 +16,44 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  List foodMenu = [
-    // nigiri
-    Food(
-      name: 'Original Sushi',
-      price: '£7.99',
-      imagePath: 'lib/images/original_sushi.png',
-      rating: "4.7"
-    ),
-    // onigiri
-    Food(
-      name: 'Shrimp Sushi',
-      price: '£3.99',
-      imagePath: 'lib/images/shrimp_sushi.png',
-      rating: "4.8"
-    ),
-    // takoyaki
-    Food(
-      name: 'Tamago Sushi',
-      price: '£4.49',
-      imagePath: 'lib/images/tomago_sushi.png',
-      rating: "4.6"
-    ),
-    // tobiko
-    Food(
-      name: 'Toro Sushi',
-      price: '£5.29',
-      imagePath: 'lib/images/toro.png',
-      rating: "4.1"
-    ),
-  ];
-
-  List _filteredFoods = [];
-
   void navigateToFoodDetails(int index) {
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
+
     Navigator.push(context,MaterialPageRoute(
       builder: (context) => FoodDetailsPage(food: foodMenu[index]),
     ),);
   }
 
   @override
-  void initState() {
-    super.initState();
-    _filteredFoods = foodMenu;
-  }
-
-  void _filterFoods(String query) {
-    setState(() {
-      _filteredFoods = foodMenu
-          .where((food) =>
-              food.name.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final shop = context.read<Shop>();
+    final foodMenu = shop.foodMenu;
+
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey[800],
         elevation: 0.0,
-        leading: Icon(
-          Icons.menu,
-          color: Colors.grey[900],
-        ),
+        leading: const Icon(Icons.menu),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.location_on_outlined,
-              color: Colors.grey[900],
-            ),
+            const Icon(Icons.location_on_outlined),
             const SizedBox(width: 2.0),
             Text(
               'Tokyo',
-              style: GoogleFonts.dmSerifDisplay(
-                fontSize: 20.0,
-                color: Colors.grey[900],
-              ),
+              style: GoogleFonts.dmSerifDisplay(fontSize: 20.0),
             ),
           ],
         ),
         actions: [
-          Icon(
-            Icons.shopping_cart_outlined,
-            color: Colors.grey[900],
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/cartpage');
+            },
+            icon: const Icon(Icons.shopping_cart_outlined),
           ),
           const SizedBox(width: 20.0),
         ],
@@ -108,7 +61,7 @@ class _MenuPageState extends State<MenuPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // promo banner
+           // promo banner
           Container(
             decoration: BoxDecoration(
               color: primaryColor,
@@ -170,7 +123,6 @@ class _MenuPageState extends State<MenuPage> {
                 hintText: 'Search here',
                 prefixIcon: const Icon(Icons.search),
               ),
-              onChanged: _filterFoods,
             ),
           ),
 
@@ -194,9 +146,9 @@ class _MenuPageState extends State<MenuPage> {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: _filteredFoods.length,
+              itemCount: foodMenu.length,
               itemBuilder: (context, index) => FoodTile(
-                food: _filteredFoods[index],
+                food: foodMenu[index],
                 onTap: () => navigateToFoodDetails(index),
               ),
             ),
