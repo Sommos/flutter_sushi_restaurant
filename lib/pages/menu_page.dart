@@ -20,7 +20,7 @@ class _MenuPageState extends State<MenuPage> {
     Food(
       name: 'Salmon Nigiri',
       price: '£7.99',
-      imagePath: 'lib/images/nigiri.png',
+      imagePath: 'lib/images/salmon_nigiri.png',
       rating: "4.79"
     ),
     // onigiri

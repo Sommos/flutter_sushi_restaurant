@@ -32,15 +32,13 @@ class FoodTile extends StatelessWidget {
             // image
             Image.asset(
               food.imagePath,
-              height: 140.0,
+              height: 150.0,
             ),
-
             // text
             Text(
               food.name,
               style: GoogleFonts.dmSerifDisplay(fontSize: 20.0),
             ),
-
             SizedBox(
               width: 160.0,
               child: Row(
