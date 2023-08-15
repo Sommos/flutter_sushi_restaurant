@@ -40,7 +40,10 @@ class _MenuPageState extends State<MenuPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.location_on_outlined),
+            Icon(
+              Icons.location_on_outlined,
+              color: primaryColor,
+            ),
             const SizedBox(width: 2.0),
             Text(
               'Tokyo',

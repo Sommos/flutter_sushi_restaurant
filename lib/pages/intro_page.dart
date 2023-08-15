@@ -30,6 +30,39 @@ class IntroPageState extends State<IntroPage> {
             ),
           ),
 
+          const Positioned(
+            left: 30.0,
+            top: 0.0,
+            bottom: 150.0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "日 ",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 100.0,
+                  ),
+                ),
+                Text(
+                  "本 ",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 100.0,
+                  ),
+                ),
+                Text(
+                  "食 ",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 100.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
           // background image
           Positioned(
             right: 30.0,
