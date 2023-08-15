@@ -2,14 +2,18 @@ import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 
 import "models/shop.dart";
+import "models/filter_menu.dart";
 import "pages/intro_page.dart";
 import "pages/menu_page.dart";
 import "pages/cart_page.dart";
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => Shop(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<Shop>(create: (context) => Shop()),
+        ChangeNotifierProvider<FilterMenu>(create: (context) => FilterMenu()),
+      ],
       child: const MyApp(),
     ),
   );

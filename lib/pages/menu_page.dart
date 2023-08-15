@@ -2,9 +2,11 @@ import "package:flutter/material.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:provider/provider.dart";
 
+import "../components/filter_tile.dart";
 import "../components/food_tile.dart";
 import "../components/button.dart";
 import "../models/shop.dart";
+import "../models/filter_menu.dart";
 import "../theme/colors.dart";
 import "food_details_page.dart";
 
@@ -29,6 +31,8 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     final shop = context.read<Shop>();
     final foodMenu = shop.foodMenu;
+    final filterMenu = context.read<FilterMenu>();
+    final filterFood = filterMenu.filterFood;
 
     return Scaffold(
       backgroundColor: Colors.grey[300],
@@ -90,7 +94,7 @@ class _MenuPageState extends State<MenuPage> {
                       ),
                     ),
 
-                    const SizedBox(height: 20.0),
+                    const SizedBox(height: 10.0),
 
                     // redeem button
                     MyButton(
@@ -129,7 +133,25 @@ class _MenuPageState extends State<MenuPage> {
             ),
           ),
 
-          const SizedBox(height: 25.0),
+          const SizedBox(height: 10.0),
+
+          Padding(
+            padding: const EdgeInsets.only(left: 5.0),
+            child: SizedBox(
+              height: 50.0,
+              width: 1000.0,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: filterFood.length,
+                itemBuilder: (context, index) => FilterTile(
+                  filter: filterFood[index],
+                  onTap: () {},
+                ),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 10.0),
 
           // menu list
           Padding(
@@ -157,7 +179,7 @@ class _MenuPageState extends State<MenuPage> {
             ),
           ),
 
-          const SizedBox(height: 25.0),
+          const SizedBox(height: 10.0),
 
           // Popular Food section
           Padding(
@@ -175,7 +197,7 @@ class _MenuPageState extends State<MenuPage> {
             ),
           ),
 
-          const SizedBox(height: 25.0),
+          const SizedBox(height: 10.0),
 
           // popular food
           Container(
